@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+<body>
+
+  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+
+    // Regular
+    console.log('Hello hello!');
+
+    // Interpolated
+    console.log('Hello, I am a %s!', '🍔');
+
+    // Styled
+    console.log('%cHowdy ho!', 'color: blue; font-size: 50px');
+
+    // warning!
+    console.warn('Crikey!');
+
+    // Error :|
+    console.error('Error!');
+
+    // Info
+    console.info('I am the best!');
+
+    // Testing
+    const p = document.querySelector('p');
+    console.assert(p.hasChildNodes(), 'Element does not contain content!');
+
+    // clearing
+    console.clear();
+
+    // Viewing DOM Elements
+    console.log(p);
+    console.dir(p);
+
+    // Grouping together
+    dogs.forEach(dog => {
+      console.count('Hello hello');
+      console.groupCollapsed(`${dog.name}`)
+      console.log(`The dog's name is ${dog.name}.`);
+      console.log(`The dog's age is ${dog.age} years.`);
+      console.log(`The dog's age is ${dog.age * 7} years in dog years.`);
+      console.groupEnd(`${dog.name}`)
+    }); 
+
+    // counting
+    console.count('Hello hello');
+
+    // timing
+    console.clear();
+    const body = document.querySelector('body');
+    //const image = document.querySelector('img');
+    const image = document.createElement('img');
+    console.time('Fetching data');
+    fetch('https://api.github.com/users/wesbos')
+      .then(blob => blob.json())
+      .catch(error => console.error(error))
+      .then(data => {
+        console.timeEnd('Fetching data');
+        image.src = data.avatar_url;
+      });
+    //body.appendChild(image);
+    body.insertBefore(image, p.nextSibling);
+  </script>
+</body>
+</html>
