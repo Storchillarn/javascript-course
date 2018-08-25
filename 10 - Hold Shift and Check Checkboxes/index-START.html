@@ -99,6 +99,54 @@
   </div>
 
 <script>
+
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+let lastChecked;
+
+function handleEvent(e) {
+  let inBetween = false;
+  if (e.shiftKey === true && this.checked === true) {
+    checkboxes.forEach(checkbox => {
+      // loop through every checkbox
+      // check if inbetween two already checked boxes
+      if (checkbox === this || checkbox === lastChecked) {
+        inBetween = !inBetween;
+      }
+      if (inBetween) {
+        checkbox.checked = true;
+      }
+    });
+  }
+  lastChecked = this;
+}
+
+checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleEvent));
+
+/*function checkKey(e) {
+  if (e.key === 'Shift') {
+    keyDown = true;
+    console.log('Shift key down!')
+  } else {
+    return;
+  }
+}
+
+window.addEventListener('keyup', (e) => {
+  if (e.key === 'Shift') {
+    keyDown = false;
+    console.log('Shift key up!')
+  } else {
+    return;
+  }
+});
+
+window.addEventListener('keydown', checkKey);*/
+
+
+// When checked --> Store index in array.
+// When second checked --> If SHIFT is pressed: Compare index with stored index. 
+// If indexes in between --> Add class "Checked" to them as well.
+
 </script>
 </body>
 </html>
